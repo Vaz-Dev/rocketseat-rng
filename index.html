@@ -4,14 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteador de números</title>
-    <link href="./stylesheet.css" type="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="./stylesheet.css" rel="stylesheet">
 </head>
 <body>
     <header>
-        <img>
+        <img id="logo" src="./img/logo.png">
     </header>
     <main>
-
+        <section>
+            <div>
+                <h4>
+                    Online - gratuito
+                </h4>
+                <h1>
+                    Sorteador de números
+                </h1>
+            </div>
+            <div class="desktop-only" id="faq">
+                <div>
+                    <div class="faq-title">
+                        <img src="./img/faq.svg">
+                        <p>
+                            Como funciona o sorteador de números?
+                        </p>
+                    </div>
+                    <p class="small">
+                        O sorteador utiliza um algoritmo de geração aleatória para criar números dentro do intervalo especificado pelo usuário.
+                    </p>
+                </div>
+                <div>
+                    <div class="faq-title">
+                        <img src="./img/faq.svg">
+                        <p>
+                            Posso escolher o intervalo dos números?
+                        </p>
+                    </div>
+                    <p class="small">
+                        Sim, você pode definir os valores mínimo e máximo para o intervalo dos números sorteados.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <form>
+                <div>
+                    <label class="large">
+                        Quero sortear:
+                    </label>
+                    <p class="large">
+                        defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados na tela. É rápido e fácil!
+                    </p>
+                </div>
+                <div>
+                    <div>
+                        <div>
+                            <label>
+                                números
+                            </label>
+                            <input type="number" name="numberQuantity" id="numberQuantity" min="1" max="99">
+                        </div>
+                        <div>
+                            <label>
+                                de
+                            </label>
+                            <input type="number" name="numberMin" id="numberMin" min="1" max="99">
+                        </div>
+                        <div>
+                            <label>
+                                até
+                            </label>
+                            <input type="number" name="numberMax" id="numberMax" min="1" max="99">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="numberRepeat" id="numberRepeat">
+                        <p class="small">Não repetir número</p>
+                    </div>
+                </div>
+                <button type="submit">
+                    <label>Sortear</label>
+                    <img src="./img/arrow-right.svg">
+                </button>
+            </form>
+            <div class="mobile-only" id="faq">
+                <div>
+                    <div class="faq-title">
+                        <img src="./img/faq.svg">
+                        <p>
+                            Como funciona o sorteador de números?
+                        </p>
+                    </div>
+                    <p class="small">
+                        O sorteador utiliza um algoritmo de geração aleatória para criar números dentro do intervalo especificado pelo usuário.
+                    </p>
+                </div>
+                <div>
+                    <div class="faq-title">
+                        <img src="./img/faq.svg">
+                        <p>
+                            Posso escolher o intervalo dos números?
+                        </p>
+                    </div>
+                    <p class="small">
+                        Sim, você pode definir os valores mínimo e máximo para o intervalo dos números sorteados.
+                    </p>
+                </div>
+            </div>
+        </section>
     </main>
     <script src="./scripts.js"></script>
 </body>
