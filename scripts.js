@@ -20,7 +20,7 @@ const rng = {
             this.repeat = numberRepeat.checked
         }
         form.innerHTML = `
-            <div>
+            <div id="outputTitle">
                 <label class=large>
                     Resultado do sorteio
                 <label>
@@ -30,22 +30,25 @@ const rng = {
             </div>
             <ul id="numbersOutput">
             </ul>
-            <button onclick=rng.roll()>
-                <label> Sortear novamente </label>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path id="svg-path-1" fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C6.89136 2.75 2.75 6.89136 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 11.5858 21.5858 11.25 22 11.25C22.4142 11.25 22.75 11.5858 22.75 12C22.75 17.937 17.937 22.75 12 22.75C6.06293 22.75 1.25 17.937 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C14.7937 1.25 17.339 2.31639 19.25 4.06269V2.5C19.25 2.08579 19.5858 1.75 20 1.75C20.4142 1.75 20.75 2.08579 20.75 2.5V6C20.75 6.41421 20.4142 6.75 20 6.75H16.5C16.0858 6.75 15.75 6.41421 15.75 6C15.75 5.58579 16.0858 5.25 16.5 5.25H18.3246C16.6699 3.69872 14.446 2.75 12 2.75Z" fill="white"/>
-                    <path id="svg-path-2 d="M15.9453 12.3577C15.7686 12.9844 14.9333 13.4273 13.2629 14.3131C11.648 15.1693 10.8406 15.5975 10.1899 15.4254C9.9209 15.3542 9.6758 15.2191 9.47812 15.0329C9 14.5827 9 13.7094 9 11.9629C9 10.2163 9 9.34307 9.47812 8.89284C9.6758 8.7067 9.9209 8.57157 10.1899 8.50042C10.8406 8.32833 11.648 8.75646 13.2629 9.61272C14.9333 10.4985 15.7686 10.9414 15.9453 11.5681C16.0182 11.8268 16.0182 12.099 15.9453 12.3577Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
+            <div class="buttonWrapper" id="rerollButton" last=false>
+                <button onclick=rng.roll()>
+                    <label> Sortear novamente </label>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path id="svg-path-1" fill-rule="evenodd" clip-rule="evenodd" d="M12 2.75C6.89136 2.75 2.75 6.89136 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 11.5858 21.5858 11.25 22 11.25C22.4142 11.25 22.75 11.5858 22.75 12C22.75 17.937 17.937 22.75 12 22.75C6.06293 22.75 1.25 17.937 1.25 12C1.25 6.06294 6.06294 1.25 12 1.25C14.7937 1.25 17.339 2.31639 19.25 4.06269V2.5C19.25 2.08579 19.5858 1.75 20 1.75C20.4142 1.75 20.75 2.08579 20.75 2.5V6C20.75 6.41421 20.4142 6.75 20 6.75H16.5C16.0858 6.75 15.75 6.41421 15.75 6C15.75 5.58579 16.0858 5.25 16.5 5.25H18.3246C16.6699 3.69872 14.446 2.75 12 2.75Z" fill="white"/>
+                        <path id="svg-path-2 d="M15.9453 12.3577C15.7686 12.9844 14.9333 13.4273 13.2629 14.3131C11.648 15.1693 10.8406 15.5975 10.1899 15.4254C9.9209 15.3542 9.6758 15.2191 9.47812 15.0329C9 14.5827 9 13.7094 9 11.9629C9 10.2163 9 9.34307 9.47812 8.89284C9.6758 8.7067 9.9209 8.57157 10.1899 8.50042C10.8406 8.32833 11.648 8.75646 13.2629 9.61272C14.9333 10.4985 15.7686 10.9414 15.9453 11.5681C16.0182 11.8268 16.0182 12.099 15.9453 12.3577Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
         `
         const numbersOutput = document.getElementById("numbersOutput")
+        const rerollButton = document.getElementById("rerollButton")
         for (i=0; i<this.quantity; i++) {
             const newNumber = Math.floor(Math.random() * (this.max - this.min + 1)) + this.min;
             console.log(newNumber)
-            if (this.numbers.includes(newNumber) && this.repeat != true) {
+            if (this.numbers.includes(newNumber) && this.repeat == true) {
                 i--
                 continue
-            } else if (this.max - this.min == this.numbers.length && !this.repeat) {
+            } else if (this.max - this.min == this.numbers.length && this.repeat) {
                 alert("Número máximo de numeros dentro do intervalo atingido, não é possível continuar esse sorteio.")
                 this.rolls--
                 break
@@ -54,10 +57,10 @@ const rng = {
             }
         }
         for  (i=0; i<this.quantity; i++) {
-            await this.add(this.numbers[this.numbers.length - (1 + i)])
+            await this.add(this.numbers[this.numbers.length - (1 + i)], i == this.quantity - 1)
         }
     },
-    add(number) {
+    add(number, last) {
         return new Promise(resolve => {
             const newNumberWrapper = document.createElement("li")
             const newNumber = document.createElement("p")
@@ -66,10 +69,11 @@ const rng = {
             newNumberWrapper.append(newNumber)
             numbersOutput.append(newNumberWrapper)
             newNumberWrapper.offsetHeight
-            requestAnimationFrame(() => {
-                newNumberWrapper.setAttribute("active", true);
-            })
-            setTimeout(resolve, 3000)
+            setTimeout(newNumberWrapper.setAttribute("active", true), 1000);
+            setTimeout(resolve, 4000)
+            if (last) {
+                rerollButton.setAttribute("last", true)
+            }
         })
     },
 }
@@ -84,7 +88,6 @@ for (let input of inputs) {
     input.value = Number(value)
   });
 }
-
 form.onsubmit = (event) => {
     event.preventDefault()
     if (numberMin.value >= numberMax.value) {

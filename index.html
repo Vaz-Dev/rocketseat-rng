@@ -15,7 +15,7 @@
     </header>
     <main>
         <section>
-            <div>
+            <div id="title">
                 <h4>
                     Online - gratuito
                 </h4>
@@ -58,36 +58,47 @@
                         defina o intervalo e a quantidade de números, clique em "Sortear" e veja os resultados na tela. É rápido e fácil!
                     </p>
                 </div>
-                <div>
-                    <div>
+                <div id="formInputs">
+                    <div id="formNumInputs">
                         <div>
-                            <label>
+                            <label class="small">
                                 números
                             </label>
-                            <input type="number" name="numberQuantity" id="numberQuantity" min="1" max="99">
+                            <div class="numInputWrapper">
+                                <input required type="number" name="numberQuantity" id="numberQuantity" min="1" max="99">
+                            </div>
                         </div>
                         <div>
-                            <label>
+                            <label class="small">
                                 de
                             </label>
-                            <input type="number" name="numberMin" id="numberMin" min="1" max="99">
+                            <div class="numInputWrapper">
+                                <input required type="number" name="numberMin" id="numberMin" min="1" max="99">
+                            </div>
                         </div>
                         <div>
-                            <label>
+                            <label class="small">
                                 até
                             </label>
-                            <input type="number" name="numberMax" id="numberMax" min="1" max="99">
+                            <div class="numInputWrapper">
+                                <input required type="number" name="numberMax" id="numberMax" min="1" max="99">
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <input type="checkbox" name="numberRepeat" id="numberRepeat">
+                    <div id="formCheckboxWrapper">
+                        <div id="checkboxSlider">
+                           <input type="checkbox" name="numberRepeat" id="numberRepeat"> 
+                        </div>
                         <p class="small">Não repetir número</p>
                     </div>
                 </div>
-                <button type="submit">
-                    <label>Sortear</label>
-                    <img src="./img/arrow-right.svg">
-                </button>
+                <div class="buttonWrapper">
+                    <button type="submit">
+                        <label>Sortear</label>
+                        <img src="./img/arrow-right.svg">
+                    </button>
+                </div>
+                
             </form>
             <div class="mobile-only" id="faq">
                 <div>

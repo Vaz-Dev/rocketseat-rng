@@ -19,12 +19,29 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-/* 0.2 Scroll Rules */
+/* Scroll Rules */
 body, html {
     width: 100vw;
     overflow-x: hidden;
     scroll-behavior: smooth;
+}
+
+/* Hide on mobile/desktop */
+ @media only screen and (max-width: 767px) {
+    .desktop-only {
+        display: none !important;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .mobile-only {
+        display: none !important;
+    }
 }
 
 /* Style Guide */
@@ -71,7 +88,7 @@ body, html {
             font-weight: 800;
             text-transform: uppercase;
         }
-        .display-small, h3 {
+        .display-small, h3, input[type="number"] {
             font-family: "Sora", sans-serif;
             font-size: 32px;
             line-height: 130%;
@@ -117,12 +134,227 @@ body, html {
         }
         .label-small, label.small {
             font-family: "Roboto Flex", sans-serif;
-            font-size: 20px;
+            font-size: 16px;
             line-height: 150%;
             font-weight: 700;
             text-transform: uppercase;
         }
 
+    /* Components */
+        input[type="number"] {
+            background-color: var(--background-secondary);
+            border: 1px solid var(--background-secondary);
+            color: var(--content-primary);
+            outline: none;
+            padding: 3px 7px;
+            text-align: center;
+            border-radius: 8px;
+            background-clip: padding-box;
+            transition: border-color 0.4s ease, background 0.4s ease;
+        }
+        input[type="number"]:hover {
+            background-color: var(--background-tertiary);
+            border: 1px solid rgba(0,0,0,0);
+            outline: none;
+        }
+        input[type="number"]:focus {
+            background-color: var(--background-tertiary);
+            border: 2px solid rgba(0,0,0,0);
+            padding: 2px 6px;
+            outline: none;
+        }
+        .numInputWrapper {
+            background-image: var(--background-secondary);
+            border-radius: 8px;
+            background-clip: border-box;
+        }
+        .numInputWrapper:has(input[type="number"]:hover), .numInputWrapper:has(input[type="number"]:focus) {
+            background-image: var(--gradient-border);
+        }
+        div:has(input[type="number"]) > label {
+            color: var(--content-secondary);
+            transition: all 0.4s ease;
+        }
+        #formNumInputs > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        div:has(input[type="number"]:hover) > label, div:has(input[type="number"]:focus) > label {
+            color: var(--content-brand)
+        }
+
+        #formCheckboxWrapper {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        input[type="checkbox"] {
+            width: 30px;
+            height: 20px;
+            outline: none;
+            opacity: 0;
+            margin: 0;
+            cursor: pointer;
+        }
+        #checkboxSlider {
+            position: relative;
+            background: var(--gradient-background);
+            background-clip: content-box;
+            border-radius: 16px;
+            width: 30px;
+            height: 20px;
+            filter: saturate(0) brightness(1.15);
+            transition: filter 0.4s ease;
+        }
+        #checkboxSlider::before {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            content: "";
+            width: 14px;
+            height: 14px;
+            background: var(--content-primary);
+            border-radius: 99px;
+            transition: all 0.4s ease;
+        }
+        #checkboxSlider:has(input[type="checkbox"]:checked) {
+            background: var(--gradient-background);
+            filter: saturate(1);
+        }
+        #checkboxSlider:has(input[type="checkbox"]:checked)::before {
+            transform: translateX(10px);
+        }
+
+        button {
+            background: var(--background-tertiary);
+            border: 2px solid var(--background-tertiary);
+            transition: border 0.4s ease, background 0.4s ease, gap 1.2s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            color: var(--content-primary);
+            border-radius: 8px;
+            background-clip: padding-box;
+            flex-grow: 1;
+            padding: 16px 0;
+        }
+        button:hover {
+            background: var(--background-secondary);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            gap: 24px;
+        }
+        .buttonWrapper {
+            background: var(--background-tertiary);
+            transition: filter 0s;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            filter: hue-rotate(0deg);
+        }
+        .buttonWrapper:hover {
+            background: var(--gradient-border);
+            filter: hue-rotate(36000deg);
+            transition: filter 160s;
+        }
+    
+        #numbersOutput li {
+            position: relative;
+            transform: scale(0);
+            transition: scale 0.2s ease;
+        }
+        #numbersOutput li p {
+            font-family: "Roboto Mono", monospace !important;
+            font-size: 48px !important;
+            color: var(--background-primary);
+            filter: opacity(0);
+            display: flex;
+            width: 100px;
+            height: 100px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 3s linear, filter 3s linear;
+        }
+        #numbersOutput li::before {
+            position: absolute;
+            left: 0;
+            top: 0;
+            content: "";
+            height: 100px;
+            width: 100%;
+            background-color: var(--content-brand);
+            border-radius: 28px;
+            filter: opacity(1);
+            transform: rotateZ(0deg);
+            transition: transform 3s linear, filter 3s linear;
+        }
+        #numbersOutput li[active=true] {
+            animation: liOutput 3s ease forwards;
+        }
+        #numbersOutput li[active=true] p {
+            animation: pOutput 3s linear forwards;
+        }
+        #numbersOutput li[active=true]::before {
+            animation: beforeOutput 3s linear forwards;
+        }
+        @keyframes liOutput {
+            0% {
+                transform: scale(0);
+            }
+            8% {
+                transform: scale(1.3);
+            }
+            16% {
+                transform: scale(1.15);
+            }
+            85% {
+                transform: scale(1.15);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes pOutput {
+            0% {
+                filter: opacity(0);
+            }
+            50% {
+                filter: opacity(0);
+            }
+            55% {
+                filter: opacity(1);
+            }
+            95% {
+                filter: opacity(1);
+                color: var(--background-primary);
+            }
+            100% {
+                color: var(--content-brand);
+                filter: opacity(1);
+            }
+        }
+        @keyframes beforeOutput {
+            0% {
+                transform: rotateZ(0deg);
+            }
+            33% {
+                transform: rotateZ(0deg);
+            }
+            66% {
+                transform: rotateZ(180deg);
+            }
+            95% {
+                filter: opacity(1);
+            }
+            100% {
+                transform: rotateZ(180deg);
+                filter: opacity(0);
+            }
+        }
 /* Main CSS */
 
     body {
@@ -140,16 +372,62 @@ body, html {
         padding: 76px 120px;
     }
 
-    #logo {
-        
-    }
-
     main {
+        display: flex;
+        justify-content: center;
         padding: 0 134px 154px;
         flex-grow: 1;
         height: 100%;
-        background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 100%),url(./img/background.png);
+        background: linear-gradient(180deg, var(--background-primary) 0%, rgba(0,0,0,0.5) 100%),url(./img/background.png);
         background-size: contain;
+        gap: 108px;
+    }
+
+     @media only screen and (max-width: 767px) {
+        main {
+            flex-direction: column;
+            padding: 0 36px 40px;
+        }
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        min-width: 482px;
+        max-width: 510px;
+        justify-content: center;
+    }
+
+    #title {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    h4 {
+        background-image:var(--gradient-content);
+        background-clip: text;
+        color: transparent;
+    }
+
+    #faq {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+        max-width: 386px;
+    }
+
+    .faq-title {
+        color: var(--content-brand);
+        display: flex;
+        gap: 14px;
+        align-items: center;
+    }
+
+    #faq .small {
+        margin-left: 34px;
+        color: var(--content-secondary);
     }
 
     ul {
@@ -165,4 +443,69 @@ body, html {
     }
     li[active=true] {
         filter: opacity(1);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        width: 100%;
+    }
+    #formInputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    #formNumInputs {
+        display: flex;
+        gap: 12px;
+    }
+    #outputTitle {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        align-items: center;
+        text-align: center;
+    }
+    #numbersOutput {
+        list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+    #rerollButton[last=false] {
+        filter: opacity(0);
+    }
+    #rerollButton[last=true] {
+        animation: rerollOutput 4s linear forwards;
+    }
+
+    @keyframes rerollOutput {
+        0% {
+            filter: opacity(0);
+            transform:translateY(80px);
+        }
+        75% {
+            filter: opacity(0);
+            transform: scaleY(80px);
+        }
+        100% {
+            filter: opacity(1);
+            transform: scaleY(0px);
+        }
+    }
+
+    button:hover #svg-path-1 {
+        animation: rollSvgPath 1s forwards infinite;
+        transform-origin: 50% 50%;
+    }
+
+    @keyframes rollSvgPath {
+        from {
+            transform: rotate(0deg)
+        }
+        to {
+            transform: rotate(360deg)
+        }
     }
