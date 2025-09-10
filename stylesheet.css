@@ -140,6 +140,16 @@ body, html {
             text-transform: uppercase;
         }
 
+         @media only screen and (max-width: 767px) {
+            .display-large, h1 {
+                font-family: "Sora", sans-serif;
+                font-size: 40px;
+                line-height: 130%;
+                font-weight: 800;
+                text-transform: uppercase;
+            }
+        }
+
     /* Components */
         input[type="number"] {
             background-color: var(--background-secondary);
@@ -159,8 +169,8 @@ body, html {
         }
         input[type="number"]:focus {
             background-color: var(--background-tertiary);
-            border: 2px solid rgba(0,0,0,0);
-            padding: 2px 6px;
+            border: 3px solid rgba(0,0,0,0);
+            padding: 1px 5px;
             outline: none;
         }
         .numInputWrapper {
@@ -383,10 +393,18 @@ body, html {
         gap: 108px;
     }
 
-     @media only screen and (max-width: 767px) {
+     @media only screen and (max-width: 1300px) {
         main {
             flex-direction: column;
             padding: 0 36px 40px;
+            align-items: center;
+            gap: 40px;
+            padding: 0 134px 0;
+        }
+
+        header {
+            justify-content: center ;
+            padding: 44px 0;
         }
     }
 
@@ -397,6 +415,16 @@ body, html {
         min-width: 482px;
         max-width: 510px;
         justify-content: center;
+    }
+
+    @media only screen and (max-width: 540px) {
+        section {
+            min-width: 80vw;
+        }
+
+        main {
+            padding: 40px 20px
+        }
     }
 
     #title {
@@ -496,8 +524,8 @@ body, html {
         }
     }
 
-    button:hover #svg-path-1 {
-        animation: rollSvgPath 1s forwards infinite;
+    button:hover #svg-path-arrow {
+        animation: rollSvgPath 1s linear infinite;
         transform-origin: 50% 50%;
     }
 
